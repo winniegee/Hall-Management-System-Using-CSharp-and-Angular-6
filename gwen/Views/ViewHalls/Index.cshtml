@@ -1,0 +1,98 @@
+﻿@page
+
+
+<head>
+    <base href="/">
+    <script src="~/clientapp/dist/runtime.js"></script>
+    <script src="~/clientapp/dist/polyfills.js"></script>
+    <script src="~/clientapp/dist/styles.js"></script>
+    <script src="~/clientapp/dist/vendor.js"></script>
+    <script src="~/clientapp/dist/main.js"></script>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <app-root></app-root>
+</body>
+
+
+@*<meta charset="utf-8">
+    <title>HallApp</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    </head>
+    <body>
+        <app-root></app-root>*@
+
+
+
+@*<body>
+
+        <div class="container-fluid col-lg-12">
+            <div class="col-lg-4">
+                <select class="form-control" id="locations" name="locations">
+                    <option value="-1">---Choose Location---</option>
+                    @foreach (var item in Model.Halls)
+                    {
+                        <option>@item.Locations.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-lg-4">
+
+                <select class="form-control" id="purposes" name="purposes">
+                    <option value="-1">---Type of Event---</option>
+                    @foreach (var item in Model.Halls)
+                    {
+
+                        <option>@item.Purposes.Select(x => x.Name)</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-lg-4">
+                <input type="submit" value="Search" id="search" />
+                </>
+            </div>
+        </div>
+
+
+        <br />
+        <div id="target">
+
+        </div>
+        <div id="log">
+
+        </div>
+        <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                 $('#search').click(function (e) {
+                    e.preventDefault(),
+                        $.ajax({
+                            url: '@Url.Action("ViewHalls","HallView")',
+                            type: 'POST',
+                            data: {
+                                location: $('#locations').val(),
+                                purpose: $('#purposes').val()
+                            },
+                            success: function (resp) {
+
+                                $('#target').html(resp);
+
+                            },
+                        error: function (jqxhr) {
+                            $("#log").ajaxError(function (event, jqxhr, settings, exception) {
+                                alert(exception);
+                            });
+                        }
+
+                        });
+                });
+            });
+
+        </script>
+    </body>*@

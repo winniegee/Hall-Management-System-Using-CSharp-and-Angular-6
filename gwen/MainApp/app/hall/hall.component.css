@@ -1,0 +1,9 @@
+@media only screen and (max-width:400) {
+    .product-info {
+
+    }
+    img{
+        height:20px!important;
+        width:50px!important;
+    }
+}

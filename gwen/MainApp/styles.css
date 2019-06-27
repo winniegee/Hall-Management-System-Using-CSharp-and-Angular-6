@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+@import url('../node_modules/font-awesome/css/font-awesome.min.css');
+/*@import url('../node_modules/jquery/dist/jquery.min.js');*/
+@import url('../content/animate.css');
+@import url('../content/morphext-2.4.4/dist/morphext.css'); 

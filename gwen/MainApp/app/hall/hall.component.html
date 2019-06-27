@@ -1,0 +1,46 @@
+
+<div class="row" style="background-color:skyblue">
+    <div class="col-md-1"></div>
+    <h1 style="font-size:20px;font-family:sans-serif;margin-top:20px">FILTER HALLS BY:</h1>
+    <!--<label style="font-size:25px; font-style:normal;color:black;padding-left:0px!important">Filter by location</label>-->
+    <div class="col-md-2">
+        <select (ngModelChange)="setLocation($event.name)" [ngModel]="location" style="margin-top:20px!important; margin-left:80px;font-size:20px">
+            <option value="">---Locations---</option>
+            <option *ngFor="let location of locations" [ngValue]="location">{{location.name}}</option>
+        </select>
+    </div>
+    <!--<label style="font-size:25px; font-style:normal;color:black;padding-left:0px!important">Filter by Event type</label>-->
+    <div class="col-md-2">
+        <select (ngModelChange)="setPurpose($event.name)" [ngModel]="purpose" style="margin-top:20px!important; margin-left:120px;font-size:20px">
+            <option value="">---Event types---</option>
+            <option *ngFor="let purpose of purposes" [ngValue]="purpose">{{purpose.name}}</option>
+        </select>
+    </div>
+    <div class="col-md-2" style="padding-left:250px">
+        <button class="btn-success" style="height:50px;width:50px" value="Filter" (click)="performFilter()"></button>
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="product-info col-md-4 col-sm-4 col-xs-4" *ngFor="let value of filteredProducts">
+        <div class="thumbnail">
+
+            <img src="{{value.image}}" class="img-thumbnail" style="height:260px;width:400px" alt="hall/{{value.name}}" />
+            <h2>{{value.name}}</h2>
+            <h4><span class="price"></span>&#8358;{{value.price|number}}</h4>
+            <!--<p>Located in @item.Locations.Name</p>
+    <p>Hall is for @item.Purposes.Select(x => x.Name)</p>-->
+            <p>{{value.description}}</p>
+            <p>location:{{value.locationName}}</p>
+            <button class="btn btn-success" [routerLink]="['/hallDetails', value.id]">View Hall</button>
+            <div *ngFor="let p of value.Purposes">
+                <p>Purpose: {{p.name}}  </p>
+            </div>
+
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,91 @@
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 col-md-6  col-md-offset-3" id="alll">
+                <h2><strong>Hall Registration</strong></h2>
+                <hr class="colorgraph">
+                <hr />
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-10  col-md-offset-3" id="all">
+                <form (ngSubmit)="onHallReg()" #form="ngForm" novalidate>
+                    <div *ngIf="errorMsg" class="alert alert-warning">{{errorMsg}}</div>
+
+                    <div class="left">
+                        <div class="form-group" id="hallname">
+                            <label for="hallname">Hall Name</label>
+                            <input type="text" class="form-control" name="hallname" [(ngModel)]="model.hallname" #hallname="ngModel" required />
+                            <div class="text-danger" *ngIf="hallname.touched&&hallname.invalid && hallname.errors.required">Hall name is required!</div>
+                        </div>
+                        <div class="form-group" id="email">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
+                            <div class="text-danger" *ngIf="email.touched&&email.invalid && email.errors.required">email is required!</div>
+                        </div>
+                        <div class="form-group" id="price">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" name="price" [(ngModel)]="model.price" #price="ngModel" required />
+                            <div class="text-danger" *ngIf="price.touched&&price.invalid && price.errors.required">price is required!</div>
+                        </div>
+                        <div class="form-group" id="description">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" name="description" [(ngModel)]="model.description" #description="ngModel" required />
+                            <div class="text-danger" *ngIf="description.touched&&description.invalid && description.errors.required">description is required!</div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="form-group" id="purpose">
+                            <label for="purpose">Purpose</label><br />
+                            <!--<select (change)="getPurposeByNamee($event.target.value)" name="purposes"  style="font-size:20px; height:30px; width:300px" multiple>
+                            <option value="">---Event types---</option>
+                            <option *ngFor="let purpose of purposes" [ngValue]="purposes">{{purpose.name}}</option>
+                             </select>-->
+                            <ng-multiselect-dropdown [placeholder]="'----Select Purposes---'"
+                                                     [data]="purposes" 
+                                                     [(ngModel)]="selectedpurposes" 
+                                                     [settings]="dropdownSettings" 
+                                                     (onSelect)="onItemSelect($event)"
+                                                     (onSelectAll)="onSelectAll($event)"
+                                                     name="purposes" style="font-size:20px; height:30px; width:300px" multiple>
+                            </ng-multiselect-dropdown>
+                        </div>
+                        <div class="form-group" id="location">
+                            <label for="location">Location</label><br/>
+                            <select (change)="getLocationByNamee($event.target.value)" style="font-size:20px; height:30px; width:300px" >
+                               <option value="">---Locations---</option>
+                                <option *ngFor="let location of locations" [ngValue]="locations" >{{location.name}}</option>
+                            </select>
+                          
+                        </div>
+                            <div class="form-group" id="password">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+                                <div class="text-danger" *ngIf="password.touched && password.invalid && password.errors.required">password is required!</div>
+                            </div>
+                            <div class="form-group" id="confirmpassword">
+                                <label for="confirmpassword">Confirm password</label>
+                                <input type="password" class="form-control" name="confirmpassword" [(ngModel)]="model.confirmpassword" #confirmpassword="ngModel" required />
+                                <div class="text-danger" *ngIf="confirmpassword.touched && confirmpassword.invalid && confirmpassword.errors.required">Confirm password is required!</div>
+                            </div>
+                            <div class="form-group" id="picture">
+                                Upload image &nbsp; &nbsp;
+
+                                <input type="file" #file accept='image/*'  name="image"  (click)="file.click()" (change)="upload(file.files)"  />
+                                <img [src]="imagepath" height="100" *ngIf="imagepath" /><br/>
+                                <span style="color:red; margin-top:10%" *ngIf="progress>0 && progress<100">{{progress}}%</span>
+                                <span style="color:greenyellow; margin-top:10%" *ngIf="message">{{message}}</span>
+                            </div>
+                            <!--<div class="form-group" id="roles">
+            <input type="radio" name="role" [(ngModel)]="model.role" value="user" /> Celebrant <br />
+            <input type="radio" name="role" [(ngModel)]="model.role" value="HO" /> Hall Owner <br />
+        </div>-->
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success" value="Create" (click)="onHallReg()"  [disabled]="form.invalid" /> &nbsp;&nbsp;
+                                <a routerLink="/" class="btn btn-danger">Cancel</a>
+                            </div>
+                        </div>
+</form>
+            </div>
+
+        </div>
+    </div>

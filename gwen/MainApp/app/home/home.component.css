@@ -1,0 +1,41 @@
+
+/*body {
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),  url('../../../content/cheap-banquet-halls-in-illinois-6.jpg');
+    height: 100%;
+    width: 100vw;
+    background-repeat: no-repeat;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    opacity: 1;
+}*/
+@media only screen and (max-width:760px){
+    
+   .container-fluid{
+       padding-top:30px
+   }
+    .carousel-caption {
+        margin-top:50px!important;
+    }
+    h2{
+        font-size:23px!important;
+    }
+    
+    h3 {
+        font-size: 18px !important;
+       padding-left: 3px !important;
+    }
+    #signin, #sigup {
+        font-size: 18px !important;
+        padding-left: 3px !important;
+        width: 20px !important;
+        left:0px!important;
+    }
+    #conjumb{
+
+        background-color:green!important;
+    }
+}

@@ -1,0 +1,155 @@
+﻿
+
+<head>
+    <title>Urban by TEMPLATED</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../../content/assets/css/main.css" />
+</head>
+<body>
+ <!-- Header -->
+    <header id="header" class="alt">
+        <div class="logo">
+            <!--<a href="index.html">Urban <span>by TEMPLATED</span></a>-->
+            <!--<a [routerLink]="['./']" fragment="menu">Menu</a>-->
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="position:absolute" *ngIf="this.hall.isAdmin">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:white">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav" style="position:relative">
+                    <a class="nav-item nav-link" routerLink="/">Home</a>
+                    <a class="nav-item nav-link" routerLink="/admin">Admin Page</a>
+                    <button class="nav-item nav-link" (click)="logout()" style="float:right">Logout</button>
+                </div>
+            </nav>
+            <nav class="navbar navbar-toggleable-md navbar-light  bg-faded" style="position:absolute">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:white">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav" style="position:relative">
+                    <ul class="nav navbar-nav lg float-lg-right pl-lg-5">
+                        <li class="nav-item">
+                            <a [routerLink]="['/home']">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a [routerLink]="['/hall']">Explore Halls</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact Us</a>
+                        </li>
+                        <li class="nav-item float-right " style="float:right" *ngIf="!this.hall.logged">
+                            <a [routerLink]="['/login']">Login</a>
+                        </li>
+                        <li class="nav-item" *ngIf="this.hall.isAdmin">
+                            <a [routerLink]="['/admin']">Admin Page</a>
+                        </li>
+                        <li class="nav-item" *ngIf="this.hall.isUser">
+                            <a [routerLink]="['/hallDetails']">View my hall</a>
+                        </li>
+                        <li *ngIf="this.hall.logged">
+                            <button class="nav-item nav-link" (click)="logout()" style="float:right">Logout</button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <router-outlet></router-outlet>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+        
+    
+    </body>
+
+
+
+
+
+    <!--<head>
+        <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../../../Content/Scripts/morphext.min.js"></script>
+        <script>
+            $(".morphext").Morphext({
+                animation: "fadeIn",
+                separator: ",",
+                speed: 2000,
+                complete: function () {
+                }
+            });
+        </script>
+        <link href="../../Content/Styles/animate.css" rel="stylesheet" />
+
+    </head>-->
+    <!--<head>
+        <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <link href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    </head>-->
+    <!--<body>
+        <div>
+            <div id="nav">
+                <nav class="navbar navbar-toggleable-md navbar-light fixed-top bg-faded" style="position:absolute" *ngIf="this.hall.isAdmin">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:white">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav" style="position:relative">
+                        <a class="nav-item nav-link" routerLink="/">Home</a>
+                        <a class="nav-item nav-link" routerLink="/admin">Admin Page</a>
+                        <button class="nav-item nav-link" (click)="logout()" style="float:right">Logout</button>
+                    </div>
+                </nav>
+                <nav class="navbar navbar-toggleable-md navbar-light fixed-top bg-faded" style="position:absolute">
+                    CROWN Halls
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:white">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav" style="position:relative">
+                        <ul class="nav navbar-nav lg float-lg-right pl-lg-5">
+                            <li class="nav-item">
+                                <a [routerLink]="['/home']">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a [routerLink]="['/hall']">Explore Halls</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact Us</a>
+                            </li>
+                            <li class="nav-item float-right " style="float:right" *ngIf="!this.hall.logged">
+                                <a [routerLink]="['/login']">Login</a>
+                            </li>
+                            <li class="nav-item" *ngIf="this.hall.isAdmin">
+                                <a [routerLink]="['/admin']">Admin Page</a>
+                            </li>
+                            <li class="nav-item" *ngIf="this.hall.isUser">
+                                <a [routerLink]="['/hallDetails']">View my hall</a>
+                            </li>
+                            <li *ngIf="this.hall.logged">
+                                <button class="nav-item nav-link" (click)="logout()" style="float:right">Logout</button>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+                    <div>
+                        <br />
+                        <br />
+                        <br />
+                        <router-outlet></router-outlet>
+                    </div>
+    </div>
+    </body>-->
