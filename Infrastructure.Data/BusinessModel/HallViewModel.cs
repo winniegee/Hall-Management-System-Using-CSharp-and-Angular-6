@@ -44,8 +44,6 @@ namespace Infrastructure.Data
                 Description = Description,
                 Password = Password,
                 Image = Image,
-                //Locations = Locations,
-               // BookingID=Booking
                 LocationID= Locations.Id,
                 LocationName=Locations.Name,
                 Purposes=Purpose.Where(x=>x.Name==Purposes).ToList()

@@ -38,31 +38,7 @@ namespace gwen.Controllers
            // this.repo = repo;
         }
 
-        
-        [Route("api/halls/filterByLocation")]
-        //[HttpPost]
-        //[HttpOptions]
-        //public IEnumerable<Hall> FilterByLocationAndPurpose([FromBody]LocationClass location)
-        //{
-        //    if (location.Location != null && location.Purpose == null)
-        //    {
-        //        var c = uow.Halls.GetAll().Where(x => x.Locations.Name == location.Location).ToArray();
-        //        return c;
-        //    }
-        //    else if (location.Location == null && location.Purpose != null)
-        //    {
-        //        var z = uow.Halls.GetAll().Where(x => x.Purposes.Select(y => y.Name).ToString() == location.Purpose);
-        //        return z;
-        //    }
-        //    else if (location.Location != null && location.Purpose != null)
-        //    {
-        //        var c = uow.Halls.GetAll().Where(x => x.Locations.Name== location.Location).ToArray();
-        //        var z = c.Where(x => x.Purposes.Select(y => y.Name).ToString() == location.Purpose);
-        //        return z;
-        //    }
-        //    return null;
-        //}
-
+       
         [HttpGet]
         [HttpOptions]
        // [EnableCors("CorsPolicy")]

@@ -6,6 +6,5 @@ namespace Domain.Entities
 {
     public class Purpose : BaseEntity
     {
-       // public virtual List<Hall> Hall { get; set; }
     }
 }

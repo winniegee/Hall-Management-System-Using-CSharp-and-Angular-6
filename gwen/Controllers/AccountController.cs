@@ -17,25 +17,19 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace gwen.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: /<controller>/
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> signInManager;
-        //private readonly ILogger<AccountController> logger;
-        // private readonly IConfiguration _config;
         private readonly AppSettings appSettings;
         public AccountController(SignInManager<User> signInManager, UserManager<User> _userManager, IOptions<AppSettings> appSettings)
         {
-            //this.logger = logger;
             this.signInManager = signInManager;
             this._userManager = _userManager;
             this.appSettings = appSettings.Value;
-            //this._config = _config;
         }
        // [Produces("application/json")]
         [Route("api/account/register")]
@@ -46,13 +40,6 @@ namespace gwen.Controllers
             {
                 
                 var user = new User { UserName = model.Username, Email = model.Email };
-                
-                //var exists = _userManager.FindByEmailAsync(user.Email);
-                //if (exists != null)
-                //{
-                //    ModelState.AddModelError("", "Email address already exists");
-                //    return BadRequest(ModelState);
-                //}
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -84,7 +71,6 @@ namespace gwen.Controllers
                 }
                 var role = await _userManager.GetRolesAsync(user) ;
                 var roles = role[0];
-               //var rolename=role.Where(x=>role.Contains(x.Name))
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettings.Secret));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -97,7 +83,6 @@ namespace gwen.Controllers
                     expires: DateTime.UtcNow.AddMinutes(30),
                    signingCredentials: creds,
                    claims:claims  );
-                //var token = tokenHandler.CreateToken(tokenDescriptor);
                 user.Token = tokenHandler.WriteToken(token);
                 //user.PasswordHash = null;
                 UserRole usrrole = new UserRole();
@@ -107,49 +92,7 @@ namespace gwen.Controllers
             }
             return null;
         }
-        //public IActionResult Login()
-        //{
-        //    if (this.User.Identity.IsAuthenticated)
-        //    {
-        //        return RedirectToAction("Home", "Home");
-        //    }
-        //    return Ok();
-        //}
-        //[httppost]
-        //[route("api/account/login")]
-        //[allowanonymous]
-        //public async task<iactionresult> login(loginvm model)
-        //{
-        //    if (modelstate.isvalid)
-        //    {
-        //        var user = await _usermanager.findbyemailasync(model.email);
-        //        if (user != null)
-        //        {
-        //            var result = await signinmanager.checkpasswordsigninasync(user, model.password, false);
-        //            if (!result.succeeded)
-        //            {
-        //                return unauthorized();
-
-        //            }
-        //            var claims = new[]
-        //            {
-        //            new claim(jwtregisteredclaimnames.sub, model.email),
-        //            new claim(jwtregisteredclaimnames.jti, guid.newguid().tostring())
-        //            };
-        //            var token = new jwtsecuritytoken(
-        //                issuer: _config["token:issuer"],
-        //                audience: _config["token:audience"],
-        //                claims: claims,
-        //                expires: datetime.utcnow,
-        //                signingcredentials: new signingcredentials(new symmetricsecuritykey(encoding.utf8.getbytes(_config["token:key"])),
-        //                securityalgorithms.hmacsha256)
-        //                );
-        //            return ok(new { token = new jwtsecuritytokenhandler().writetoken(token) });
-        //        }
-        //    }               
-        //    return badrequest();
-        //    }
-
+        
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
@@ -163,16 +106,5 @@ namespace gwen.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-        //private IActionResult RedirectToLocal(string returnUrl)
-        //{
-        //    if (Url.IsLocalUrl(returnUrl))
-        //    {
-        //        return Redirect(returnUrl);
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction(nameof(HomeController.Index))
-        //    }
-        //}
     }
 }
