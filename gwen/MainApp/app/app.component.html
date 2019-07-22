@@ -3,16 +3,15 @@
 <head>
     <title>Urban by TEMPLATED</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-type" name="viewport" content="text/html;charset=utf-8; width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../../../content/assets/css/main.css" />
 </head>
 <body>
  <!-- Header -->
-    <header id="header" class="alt">
+    <header id="header" class="alt" style="position:relative">
         <div class="logo">
-            <!--<a href="index.html">Urban <span>by TEMPLATED</span></a>-->
-            <!--<a [routerLink]="['./']" fragment="menu">Menu</a>-->
-            <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="position:absolute" *ngIf="this.hall.isAdmin">
+           
+            <!--<nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="position:absolute" *ngIf="this.hall.isAdmin">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:white">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -21,9 +20,9 @@
                     <a class="nav-item nav-link" routerLink="/admin">Admin Page</a>
                     <button class="nav-item nav-link" (click)="logout()" style="float:right">Logout</button>
                 </div>
-            </nav>
-            <nav class="navbar navbar-toggleable-md navbar-light  bg-faded" style="position:absolute">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:white">
+            </nav>-->
+            <nav class="navbar navbar-toggleable-md navbar-light  bg-faded" style="position:relative">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="background-color:transparent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav" style="position:relative">
@@ -57,10 +56,7 @@
             </nav>
         </div>
     </header>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+   <br/>
     <router-outlet></router-outlet>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.scrolly.min.js"></script>

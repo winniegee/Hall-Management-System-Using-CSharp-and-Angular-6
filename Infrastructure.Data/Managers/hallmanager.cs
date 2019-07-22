@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interface;
+using Infrastructure.Data.BusinessModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +20,6 @@ namespace Infrastructure.Data.Managers
         }
         public void CreateHall(HallViewModel model)
         {
-            EventContext context = new EventContext();
             var hall = uow.Halls.FindByName(model.Hallname);
               if (hall != null) throw new Exception("Hall with this name already exist");
                 var entity = model.Create();
@@ -35,5 +35,11 @@ namespace Infrastructure.Data.Managers
             //    throw new Exception(result1.Message);
             //}
         }
+        public void BookHall(BookingModel model)
+        {
+            var entity = model.Create();
+            uow.Bookings.Add(entity);
+            uow.commit();
         }
+    }
     }

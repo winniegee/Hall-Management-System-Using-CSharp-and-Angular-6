@@ -8,6 +8,7 @@ import { Component, Output } from '@angular/core';
 import { User } from '../Shared/UserModel';
 import { LocationModel } from "MainApp/app/Shared/LocationModel";
 import { Halls } from "../Shared/Hall";
+import { BookingsModel } from "MainApp/app/Shared/BookingsModel";
 
 
 
@@ -25,6 +26,7 @@ export class HallService {
     public halls = [];
     public locations = [];
     public purposes = [];
+    public bookings = [];
     public logged: boolean;
     private token: string = "";
     private tokenExpiration: Date;
@@ -116,6 +118,14 @@ export class HallService {
                 return true;
             }));
     }
+    public bookHall(bookDets): Observable<boolean> {
+
+        return this.http.post("http://localhost:5000/api/bookhall", bookDets).pipe(
+            map((data: any) => {
+                return true;
+            })
+        );
+    }
 
     public getLocationByName(selection): Observable<LocationModel> {
         var newselection = JSON.stringify(selection);
@@ -139,16 +149,27 @@ export class HallService {
     }
     public getHallById(id: string): Observable<Halls> {
         console.log("id in service is " + id);
-        let myHeaders = new HttpHeaders();
-        
-        const params = new HttpParams().set('id', 'id');
-        myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Parameter', 'params');
         // let options = new RequestOptions({ headers: myHeaders, params: myParams });
         return this.http.get("http://localhost:5000/api/halls/getHallById/", { params: {ID:id} }).pipe(
             map((HallResult: any) => {
                 console.log("the hall returned is " + HallResult)
                 return HallResult;
+            }))
+    }
+    public getBookings(hallId): Observable<boolean> {
+        return this.http.get("http://localhost:5000/api/halls/getBooking/", { params: { hallID: hallId } }).pipe(
+            map((booking: any) => {
+                console.log("bookings are " + JSON.stringify(booking))
+                this.bookings = booking;
+                return true;
+            }))
+    }
+    public book(model): Observable<boolean> {
+        console.log("booking model in service are " + JSON.stringify(model))
+        var modelStringified = JSON.stringify(model);
+        return this.http.post("http://localhost:5000/api/halls/book", model).pipe(
+            map((book: any) => {
+                return true;
             }))
     }
 }

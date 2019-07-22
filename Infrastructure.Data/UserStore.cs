@@ -53,14 +53,17 @@ namespace Infrastructure.Data
 
         public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
         {
-            return Task.FromResult((object)null);
+            return Task<bool>.Run(() =>
+            {
+                user.UserName = normalizedName;
+            });
         }
 
         public async Task<IdentityResult> CreateAsync(User user, CancellationToken cancellationToken)
         {
             db.Add(user);
 
-            await db.SaveChangesAsync(cancellationToken);
+            //await db.SaveChangesAsync(cancellationToken);
 
             return await Task.FromResult(IdentityResult.Success);
         }
@@ -104,7 +107,7 @@ namespace Infrastructure.Data
         {
             return await db.Users
                            .AsAsyncEnumerable()
-                           .SingleOrDefault(p => p.UserName.Equals(normalizedUserName, StringComparison.OrdinalIgnoreCase), cancellationToken);
+                           .FirstOrDefault(p => p.UserName.Equals(normalizedUserName, StringComparison.OrdinalIgnoreCase), cancellationToken);
         }
 
         public Task SetPasswordHashAsync(User user, string passwordHash, CancellationToken cancellationToken)
@@ -126,7 +129,10 @@ namespace Infrastructure.Data
 
         public Task SetEmailAsync(User user, string email, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task<bool>.Run(() =>
+            {
+                user.Email = email;
+            });
         }
 
         public Task<string> GetEmailAsync(User user, CancellationToken cancellationToken)
@@ -148,17 +154,23 @@ namespace Infrastructure.Data
         {
             return db.Users
                            .AsAsyncEnumerable()
-                           .SingleOrDefault(p => p.Email.Equals(normalizedEmail, StringComparison.OrdinalIgnoreCase), cancellationToken);
+                           .FirstOrDefault(p => p.Email.Equals(normalizedEmail, StringComparison.OrdinalIgnoreCase), cancellationToken);
         }
 
         public Task<string> GetNormalizedEmailAsync(User user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task<bool>.Run(() =>
+            {
+                return user.Email;
+            });
         }
 
         public Task SetNormalizedEmailAsync(User user, string normalizedEmail, CancellationToken cancellationToken)
         {
-            return Task.FromResult((object)null);
+            return Task<bool>.Run(() =>
+            {
+                user.Email = normalizedEmail;
+            });
         }
 
         public Task AddToRoleAsync(User user, string roleName, CancellationToken cancellationToken)
@@ -170,6 +182,7 @@ namespace Infrastructure.Data
                 UserRole userRole = new UserRole() { UserId = user.Id , RoleId =role.Id  };
                 db.UserRole.Add(userRole);
                 db.SaveChanges();
+                return Task.CompletedTask;
             }
             return Task.FromResult((User)null);
 

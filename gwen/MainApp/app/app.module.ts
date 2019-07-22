@@ -20,7 +20,10 @@ import { HallEditAndDeleteComponent } from './hall-edit-and-delete/hall-edit-and
 import { AdminpageComponent } from './adminpage/adminpage.component';
 import { HallDetailsComponent } from './hall-details/hall-details.component';
 import { CustomPipe } from './Shared/CustomPipe';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Halls } from './Shared/Hall';
+import { BookingsModel } from './Shared/BookingsModel';
 
 
 
@@ -38,12 +41,13 @@ import { Halls } from './Shared/Hall';
       HallEditAndDeleteComponent,
       AdminpageComponent,
       HallDetailsComponent,
-      CustomPipe,
+      CustomPipe
   ],
   imports: [
       BrowserModule,
       HttpClientModule,
       NgMultiSelectDropDownModule,
+      BrowserAnimationsModule,
       RouterModule.forRoot([
           { path: 'home', component: HomeComponent },
           { path: 'hall', component: HallComponent },
@@ -57,7 +61,9 @@ import { Halls } from './Shared/Hall';
           { path: '**', component: PageNotFoundComponent }
       ]),
       HttpModule,
-      FormsModule
+      FormsModule,
+      OwlDateTimeModule,
+      OwlNativeDateTimeModule
   ],
   providers: [
       HallService,

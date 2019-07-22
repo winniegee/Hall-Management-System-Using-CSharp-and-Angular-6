@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20190620111944_init8")]
-    partial class init8
+    [Migration("20190710214844_major")]
+    partial class major
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,8 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<DateTime>("EndTime");
 
+                    b.Property<int?>("HallId");
+
                     b.Property<string>("Name");
 
                     b.Property<DateTime>("StartTime");
@@ -38,6 +40,8 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int?>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HallId");
 
                     b.HasIndex("UserId");
 
@@ -49,8 +53,6 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BookingsId");
 
                     b.Property<string>("Description");
 
@@ -69,8 +71,6 @@ namespace Infrastructure.Data.Migrations
                     b.Property<decimal>("Price");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookingsId");
 
                     b.HasIndex("LocationID");
 
@@ -167,17 +167,17 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.Booking", b =>
                 {
+                    b.HasOne("Domain.Entities.Hall", "Hall")
+                        .WithMany("Bookings")
+                        .HasForeignKey("HallId");
+
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Bookings")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Domain.Entities.Hall", b =>
                 {
-                    b.HasOne("Domain.Entities.Booking", "Bookings")
-                        .WithMany()
-                        .HasForeignKey("BookingsId");
-
                     b.HasOne("Domain.Entities.Location", "Locations")
                         .WithMany()
                         .HasForeignKey("LocationID")

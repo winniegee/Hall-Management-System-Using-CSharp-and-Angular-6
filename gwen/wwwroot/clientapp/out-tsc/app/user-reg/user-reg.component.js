@@ -37,7 +37,7 @@ var UserRegComponent = /** @class */ (function () {
         this.hall.userreg(this.model)
             .subscribe(function (success) {
             _this.router.navigate(["login"]);
-        }, function (err) { return _this.errorMsg = "Failed to Register"; });
+        }, function (err) { return alert(JSON.stringify(err.error)); });
     };
     UserRegComponent = __decorate([
         Component({

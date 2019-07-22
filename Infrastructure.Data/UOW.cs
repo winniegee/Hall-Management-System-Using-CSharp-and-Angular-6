@@ -14,11 +14,13 @@ namespace Infrastructure.Data
             Halls = new HallRepo(context);
             Purposes = new PurposeRepo(context);
             Locations = new LocationRepo(context);
+            Bookings = new BookingRepo(context);
         }
 
         public IHallRepository Halls { get; private set; }
         public IPurposeRepository Purposes { get; private set; }
         public ILocationRepository Locations { get; private set; }
+        public IBookingsRepository Bookings { get; private set; }
         public void commit()
         {
             context.SaveChanges();

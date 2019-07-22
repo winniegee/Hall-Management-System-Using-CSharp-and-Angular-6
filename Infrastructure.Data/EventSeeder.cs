@@ -95,8 +95,9 @@ namespace Infrastructure.Data
                 context.Purposes.AddOrUpdate(purposes4, x => x.Name);
                 context.Purposes.AddOrUpdate(purposes5, x => x.Name);
                 context.Purposes.AddOrUpdate(purposes6, x => x.Name);
-                //List<Hall> Halls = new List<Hall>
-                //{
+
+            //var Booking1 = new Booking() { StartTime = new DateTime(2019, 07, 10), EndTime = new DateTime(2019, 07, 10), User= };    
+
                 var hall1 = new Hall()
                 {
                     Name = "Sephora Halls",
@@ -117,7 +118,8 @@ namespace Infrastructure.Data
                     LocationName = location2.Name,
                     Price = 15000,
                     Purposes = new List<Purpose> { purposes3, purposes5, purposes6 },
-                    Image = "/content/Ballroom.jpg"
+                    Image = "/content/Ballroom.jpg",
+                    
                 };
                 var hall3 = new Hall()
                 {

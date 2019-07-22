@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class init8 : Migration
+    public partial class inituu : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

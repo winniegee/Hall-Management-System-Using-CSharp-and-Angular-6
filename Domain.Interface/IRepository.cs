@@ -19,6 +19,6 @@ namespace Domain.Interface
         void Delete(T Entity);
         // IQueryable<T> FindByName(string name);
         T FindByName(string name);
-
+        
     }
 }

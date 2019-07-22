@@ -9,6 +9,7 @@ namespace Domain.Interface
         IHallRepository Halls { get; }
         IPurposeRepository Purposes { get; }
         ILocationRepository Locations { get; }
+        IBookingsRepository Bookings { get; }
         void commit();
     }
 }

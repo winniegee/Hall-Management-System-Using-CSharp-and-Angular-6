@@ -93,6 +93,10 @@ var HallRegComponent = /** @class */ (function () {
                 _this.purposes = _this.hall.purposes;
             }
         });
+        this.hall.hallreg(this.model)
+            .subscribe(function (success) {
+            _this.router.navigate(["hall"]);
+        }, function (err) { err.error; }); // => this.errorMsg = "Failed to Create")
         this.dropdownSettings = {
             singleSelection: false,
             textField: 'name',
@@ -155,7 +159,7 @@ var HallRegComponent = /** @class */ (function () {
                         this.hall.hallreg(this.model)
                             .subscribe(function (success) {
                             _this.router.navigate(["hall"]);
-                        }, function (err) { return _this.errorMsg = "Failed to Create"; });
+                        }, function (err) { err.error; }); // => this.errorMsg = "Failed to Create")
                         return [2 /*return*/];
                 }
             });

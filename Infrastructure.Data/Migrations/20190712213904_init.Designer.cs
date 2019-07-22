@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20190619145445_init3")]
-    partial class init3
+    [Migration("20190712213904_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,17 +29,21 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<DateTime>("EndTime");
 
+                    b.Property<int>("HallID");
+
                     b.Property<string>("Name");
 
                     b.Property<DateTime>("StartTime");
 
                     b.Property<bool>("Status");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserID");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("HallID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Bookings");
                 });
@@ -49,8 +53,6 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BookingsId");
 
                     b.Property<string>("Description");
 
@@ -69,8 +71,6 @@ namespace Infrastructure.Data.Migrations
                     b.Property<decimal>("Price");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookingsId");
 
                     b.HasIndex("LocationID");
 
@@ -167,17 +167,19 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.Booking", b =>
                 {
+                    b.HasOne("Domain.Entities.Hall", "Hall")
+                        .WithMany("Bookings")
+                        .HasForeignKey("HallID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Domain.Entities.Hall", b =>
                 {
-                    b.HasOne("Domain.Entities.Booking", "Bookings")
-                        .WithMany()
-                        .HasForeignKey("BookingsId");
-
                     b.HasOne("Domain.Entities.Location", "Locations")
                         .WithMany()
                         .HasForeignKey("LocationID")

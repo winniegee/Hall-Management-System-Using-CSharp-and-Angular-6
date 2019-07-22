@@ -38,21 +38,25 @@ namespace gwen.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                var user = new User { UserName = model.Username, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var emailExist = _userManager.FindByEmailAsync(model.Email).Result;
+                var usernameExist = _userManager.FindByEmailAsync(model.Email).Result;
+                if (emailExist == null && usernameExist == null)
                 {
-                    if (model.IsHallOwner)
+                    var user = new User { UserName = model.Username, Email = model.Email };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
                     {
-                        await _userManager.AddToRoleAsync(user, "Hall Owner");
+                        if (model.IsHallOwner)
+                        {
+                            await _userManager.AddToRoleAsync(user, "Hall Owner");
+                        }
+                        else if (model.IsUser)
+                        {
+                            await _userManager.AddToRoleAsync(user, "Users");
+                        }
+                        await signInManager.SignInAsync(user, isPersistent: false);
+                        return Ok();
                     }
-                    else if (model.IsUser)
-                    {
-                        await _userManager.AddToRoleAsync(user, "Users");
-                    }
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return Ok();
                 }
             }
             return BadRequest(ModelState);

@@ -6,17 +6,16 @@ using System.Text;
 
 namespace Domain.Entities
 {
-    public class User
+    public class User:BaseEntity
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public string Roles { get; set; }
+        public string Roles { get; set; }   
         public string Token { get; set; }
-
         public virtual ICollection<UserRole> UserRole { get; set; }
+        public virtual List<Booking> Bookings { get; set; }
     }
 }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Remove="MainApp\app\Shared\approuting.ts" />
+    <None Remove="MainApp\app\Shared\BookingsModel.ts" />
     <None Remove="MainApp\app\Shared\CustomPipe.ts" />
     <None Remove="MainApp\app\Shared\ErrorInterceptor.ts" />
     <None Remove="MainApp\app\Shared\JwtInterceptor.ts" />
@@ -45,6 +46,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="MainApp\app\Shared\approuting.ts" />
     <TypeScriptCompile Include="MainApp\app\Shared\CustomPipe.ts" />
+    <TypeScriptCompile Include="MainApp\app\Shared\BookingsModel.ts" />
     <TypeScriptCompile Include="MainApp\app\Shared\ErrorInterceptor.ts" />
     <TypeScriptCompile Include="MainApp\app\Shared\JwtInterceptor.ts" />
     <TypeScriptCompile Include="MainApp\app\Shared\LocationModel.ts" />

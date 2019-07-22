@@ -20,9 +20,8 @@ namespace Infrastructure.Data
         [Compare("Password",ErrorMessage = "This doesn't match password entered earlier!")]
         public string ConfirmPassword { get; set; }
         public string Image { get; set; }
-        public Booking Bookings { get; set; } 
+        public IEnumerable<Booking> Bookings { get; set; } 
         public Location Locations { get; set; }
-        public int BookingID { get; set; }
         public int LocationID { get; set; }
         public string Purposes { get; set; }
         public IEnumerable<Purpose> Purpose { get; set; } = new List<Purpose>();
@@ -44,8 +43,8 @@ namespace Infrastructure.Data
                 Description = Description,
                 Password = Password,
                 Image = Image,
-                LocationID= Locations.Id,
-                LocationName=Locations.Name,
+                LocationID = Locations.Id,
+                LocationName = Locations.Name,
                 Purposes=Purpose.Where(x=>x.Name==Purposes).ToList()
             };
         }

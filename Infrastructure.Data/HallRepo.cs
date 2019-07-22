@@ -40,4 +40,12 @@ namespace Infrastructure.Data
             get { return this.GetAll(); }
         }
     }
+    public class BookingRepo:Repository<Booking>, IBookingsRepository
+    {
+        public BookingRepo(EventContext context) : base(context) { }
+            public IEnumerable<Booking> booking
+        {
+            get { return this.GetAll(); }
+        }
+    }
 }

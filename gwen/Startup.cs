@@ -52,22 +52,30 @@ namespace gwen
             //    options.Filters.Add(new CorsAuthorizationFilterFactory("CorsPolicy"));
             //});>
             //services.AddTransient<IRoleStore<IdentityRole>>();
-            services.AddTransient<IUserStore<User>, UserStore>();
-            services.AddTransient<IRoleStore<UserRole>, RoleStore>();
+            services.AddScoped<IUserStore<User>, UserStore>();
+            services.AddScoped<IRoleStore<UserRole>, RoleStore>();
             services.AddDbContext<EventContext>(cfg =>
             {
                 cfg.UseSqlServer(_config.GetConnectionString("EventContext")).EnableSensitiveDataLogging();
             });
 
-            services.AddIdentity<User, IdentityRole>(cfg =>
+            services.AddIdentity<User, UserRole>(cfg =>
             {
-                cfg.User.RequireUniqueEmail = false;
-            }).AddUserStore<UserStore>()
-            .AddRoleStore<RoleStore>()
-            .AddUserManager<UserManager<User>>()
+                cfg.User.RequireUniqueEmail = true;
+                cfg.Password.RequireDigit = false;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireUppercase = false;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireNonAlphanumeric = false;
+            })
+            //.AddUserStore<UserStore>()
+            //.AddRoleStore<RoleStore>()
+            //.AddUserManager<UserManager<User>>()
+            //.AddRoleManager<RoleManager<UserRole>>()
+            //.AddSignInManager<SignInManager<User>>()
             .AddDefaultTokenProviders();
 
-            services.AddTransient<RoleManager<UserRole>>();
+            //services.AddTransient<RoleManager<UserRole>>();
             services.AddScoped<EventSeeder>();
             //services.AddScoped<UserManager<User>>();
             //services.AddScoped<RoleManager<IdentityRole>>();

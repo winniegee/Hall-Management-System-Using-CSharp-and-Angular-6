@@ -13,10 +13,7 @@ namespace Infrastructure.Data
         public string Email { get; set; }
     
         public string Password { get; set; }
-
-        [Required]
-        [Display(Name = "Confirm Password")]
-        [Compare("Password", ErrorMessage = "This doesn't match password entered earlier!")]
+        
         public string ConfirmPassword { get; set; }
         
         public bool IsHallOwner { get; set; }

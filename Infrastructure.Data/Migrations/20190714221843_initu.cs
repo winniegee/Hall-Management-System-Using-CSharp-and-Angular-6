@@ -2,21 +2,21 @@
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class init3 : Migration
+    public partial class initu : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "LocationName",
-                table: "Halls",
+                name: "Name",
+                table: "Users",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "LocationName",
-                table: "Halls");
+                name: "Name",
+                table: "Users");
         }
     }
 }

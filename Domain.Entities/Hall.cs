@@ -13,9 +13,9 @@ namespace Domain.Entities
         public string Description { get; set; }
         public string Image { get; set; }
         public int LocationID { get; set; }
-        public string LocationName { get; set; 
+        public string LocationName { get; set; }
         public virtual Location Locations { get; set; }
-        public virtual Booking Bookings { get; set; }
+        public virtual List<Booking> Bookings { get; set; }
         public virtual List<Purpose> Purposes { get; set; }             
     }
 }

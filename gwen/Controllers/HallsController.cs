@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interface;
 using Infrastructure.Data;
+using Infrastructure.Data.BusinessModel;
 using Infrastructure.Data.Managers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -21,9 +22,10 @@ namespace gwen.Controllers
         public string Location { get; set; }
         public string[] Purpose { get; set; }
     }
-    public class PurposeClass
+    public class BookingTimes
     {
-       
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
     public class HallsController : Controller
     {
@@ -109,12 +111,19 @@ namespace gwen.Controllers
             return uow.Halls.Get(ID);
         }
 
+        //[HttpPost]
+        //[Route("api/bookhall")]
+        //public ActionResult BookHall()
+        //{
+            
+        //}
+
         [Route("api/upload")]
         [HttpPost]
         public ActionResult UploadFile() { 
         
                 var file = Request.Form.Files[0];
-                string webRootPath = hostingEnvironment.WebRootPath;
+                string webRootPath = hostingEnvironment.WebRootPath; 
             string newPath = "~/content/uploads";
                 if (!Directory.Exists(newPath))
                 
@@ -158,6 +167,41 @@ namespace gwen.Controllers
             }
             return result;
         }
+        [HttpGet]
+        [Route("api/halls/getBooking")]
+        public List<Booking> GetBooking(int hallID)
+
+        {
+            return uow.Bookings.GetAll().Where(x => x.HallID == hallID).ToList();
+            
+        }
+        [HttpPost]
+        [Route("api/halls/book")]
+        public ActionResult Book([FromBody]BookingModel bookingModel)
+        {
+            Hallmanager hallmanager = new Hallmanager(uow);
+            var booking = uow.Bookings.GetAll().Where(x => x.HallID == bookingModel.HallID && (bookingModel.StartTime <= x.EndTime && bookingModel.StartTime >= x.StartTime ||
+             x.StartTime <= bookingModel.EndTime && x.StartTime >= bookingModel.StartTime)).FirstOrDefault();
+            if (booking != null)
+            {
+                return BadRequest( "The hall is unavailable at this time, please choose another date or time");
+                
+            }
+            hallmanager.BookHall(bookingModel);
+            return Ok();
+        }
+        //[HttpGet]
+        //[Route("api/halls/check")]
+        //public ActionResult<string> CheckAvailability(int HallId,BookingTimes dateTime)
+        //{
+        //    var booking = uow.Bookings.GetAll().Where(x => x.HallID == HallId && (dateTime.StartTime <= x.EndTime && dateTime.StartTime >= x.StartTime ||
+        //      x.StartTime <= dateTime.EndTime && x.StartTime >= dateTime.StartTime)).FirstOrDefault();
+        //    if (booking != null)
+        //    {
+        //        return "The hall is unavailable at this time, please choose anothe date or time";
+        //    }
+        //    re
+        //}
     }
 }
     

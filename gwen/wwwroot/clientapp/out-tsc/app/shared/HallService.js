@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -21,6 +21,7 @@ var HallService = /** @class */ (function () {
         this.halls = [];
         this.locations = [];
         this.purposes = [];
+        this.bookings = [];
         this.token = "";
         this.currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -111,6 +112,11 @@ var HallService = /** @class */ (function () {
             return true;
         }));
     };
+    HallService.prototype.bookHall = function (bookDets) {
+        return this.http.post("http://localhost:5000/api/bookhall", bookDets).pipe(map(function (data) {
+            return true;
+        }));
+    };
     HallService.prototype.getLocationByName = function (selection) {
         var newselection = JSON.stringify(selection);
         console.log("just before posting to getlocationbyname");
@@ -131,14 +137,25 @@ var HallService = /** @class */ (function () {
     };
     HallService.prototype.getHallById = function (id) {
         console.log("id in service is " + id);
-        var myHeaders = new HttpHeaders();
-        var params = new HttpParams().set('id', 'id');
-        myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('Parameter', 'params');
         // let options = new RequestOptions({ headers: myHeaders, params: myParams });
         return this.http.get("http://localhost:5000/api/halls/getHallById/", { params: { ID: id } }).pipe(map(function (HallResult) {
             console.log("the hall returned is " + HallResult);
             return HallResult;
+        }));
+    };
+    HallService.prototype.getBookings = function (hallId) {
+        var _this = this;
+        return this.http.get("http://localhost:5000/api/halls/getBooking/", { params: { hallID: hallId } }).pipe(map(function (booking) {
+            console.log("bookings are " + JSON.stringify(booking));
+            _this.bookings = booking;
+            return true;
+        }));
+    };
+    HallService.prototype.book = function (model) {
+        console.log("booking model in service are " + JSON.stringify(model));
+        var modelStringified = JSON.stringify(model);
+        return this.http.post("http://localhost:5000/api/halls/book", model).pipe(map(function (book) {
+            return true;
         }));
     };
     HallService = __decorate([

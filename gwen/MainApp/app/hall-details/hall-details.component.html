@@ -10,7 +10,7 @@
         </div>
         <div class="row" style="color:black;font:bold">
             <div class="col-md-2">Price:</div>
-            <div class="col-md-4">&#8358;{{hall.price}}</div>
+            <div class="col-md-4">&#8358;{{hall.price|number}}</div>
         </div>
         <div class="row" style="color:black;font:bold">
             <div class="col-md-2">Description:</div>
@@ -23,14 +23,22 @@
         <div class="col-md-4" style="color:black;font:bold">
             <img class="center-block img-responsive" style="width:500px;margin:2px" src={{hall.image}} title={{hall.name}}>
         </div>
+        <label>
+            Set Booking  Range
+            <input [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" [(ngModel)]="selectedMoments" [selectMode]="'range'"
+                   style="width:300px" />
+            <span [owlDateTimeTrigger]="dt1"><i class="fa fa-calendar"></i></span>
+            <owl-date-time #dt1 [startView]="'year'" [pickerMode]="'dialog'"></owl-date-time>
+        </label>
+       
         <div class="card-footer">
             <button class="btn btn-outline-primary btn-warning" (click)="onBack()" style="width:80px;color:black;font:bold;background-color:red">
                 <i class="fa fa-chevron-left"></i> Back
             </button>
             &nbsp;
-            <button class="btn btn-outline-primary" (click)="onBack()" style="width:80px;color:black;font:bold;background-color:cadetblue">
+            <button class="btn btn-outline-primary" (click)="Book()" style="width:80px;color:black;font:bold;background-color:cadetblue">
                 Book<i class="fa fa-chevron-right"></i>
             </button>
         </div>
-        </div>
+    </div>
     </div>

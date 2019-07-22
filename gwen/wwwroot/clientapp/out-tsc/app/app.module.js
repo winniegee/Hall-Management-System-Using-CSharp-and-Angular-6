@@ -26,6 +26,8 @@ import { HallEditAndDeleteComponent } from './hall-edit-and-delete/hall-edit-and
 import { AdminpageComponent } from './adminpage/adminpage.component';
 import { HallDetailsComponent } from './hall-details/hall-details.component';
 import { CustomPipe } from './Shared/CustomPipe';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -43,12 +45,13 @@ var AppModule = /** @class */ (function () {
                 HallEditAndDeleteComponent,
                 AdminpageComponent,
                 HallDetailsComponent,
-                CustomPipe,
+                CustomPipe
             ],
             imports: [
                 BrowserModule,
                 HttpClientModule,
                 NgMultiSelectDropDownModule,
+                BrowserAnimationsModule,
                 RouterModule.forRoot([
                     { path: 'home', component: HomeComponent },
                     { path: 'hall', component: HallComponent },
@@ -62,7 +65,9 @@ var AppModule = /** @class */ (function () {
                     { path: '**', component: PageNotFoundComponent }
                 ]),
                 HttpModule,
-                FormsModule
+                FormsModule,
+                OwlDateTimeModule,
+                OwlNativeDateTimeModule
             ],
             providers: [
                 HallService,

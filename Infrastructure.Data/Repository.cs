@@ -71,7 +71,6 @@ namespace Infrastructure.Data
             context.Set<T>().Remove(Entity);
             context.SaveChanges();
         }
-
         //public void SaveChanges()
         //{
         //    context.SaveChanges();

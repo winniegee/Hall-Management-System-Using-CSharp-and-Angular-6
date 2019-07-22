@@ -3,4 +3,5 @@
 @import url('../node_modules/font-awesome/css/font-awesome.min.css');
 /*@import url('../node_modules/jquery/dist/jquery.min.js');*/
 @import url('../content/animate.css');
-@import url('../content/morphext-2.4.4/dist/morphext.css'); 
+@import url('../content/morphext-2.4.4/dist/morphext.css');
+@import "~ng-pick-datetime/assets/style/picker.min.css";

@@ -10,13 +10,20 @@
 }   
 
     .navbar > a {
-        color: black !important;
+        color: white !important;
         font: bold;
     }
-
-.navbar-toggler {
-    background-color: transparent !important;
+    .nav-item > a:hover{
+        color:blue!important;
+    }
+.nav-item > a:active {
+    background: #693dcc;
+    color: #fff !important;
 }
+    .navbar-toggler {
+            background-color: transparent !important;
+            padding-left:-50px!important;
+        }
 
 
 .nav-item > a {
@@ -56,7 +63,7 @@ html {
     position: fixed;
     height: 100%;
     width: 100vw;
-    position: fixed;
+    position: relative;
     width: 100%;
     width: 100%;
     top: 0;

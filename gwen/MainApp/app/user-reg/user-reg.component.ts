@@ -32,7 +32,7 @@ export class UserRegComponent implements OnInit {
         this.hall.userreg(this.model)
             .subscribe(success => {
                 this.router.navigate(["login"])
-            }, err => this.errorMsg = "Failed to Register")
+            }, err => alert(JSON.stringify( err.error)))
     }
 
 

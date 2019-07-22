@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import { HallService } from 'MainApp/app/Shared/HallService';
 import { Router } from '@angular/router';
 import { HttpRequest } from '@angular/common/http';
@@ -43,7 +43,7 @@ export class HallRegComponent implements OnInit {
                 this.purposes = this.hall.purposes;
             }
 
-        });
+        }); 
         this.dropdownSettings = {
             singleSelection: false,
             textField: 'name',
@@ -120,7 +120,7 @@ export class HallRegComponent implements OnInit {
          this.hall.hallreg(this.model)
             .subscribe(success => {
                 this.router.navigate(["hall"])
-            }, err => this.errorMsg = "Failed to Create")
+             }, err => { err.error }) // => this.errorMsg = "Failed to Create")
     }
 
     @Output() public

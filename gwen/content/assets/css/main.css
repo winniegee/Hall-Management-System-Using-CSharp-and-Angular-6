@@ -3613,7 +3613,7 @@
 					}
 
 					#menu > ul.links > li:hover {
-						color: #3498db;
+						color: green;
 					}
 
 					#menu > ul.links > li:first-child > a:not(.button) {
